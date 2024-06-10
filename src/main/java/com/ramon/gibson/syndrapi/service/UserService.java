@@ -22,6 +22,11 @@ public class UserService {
             throw new IllegalArgumentException("User with this username already exists.");
         }
 
+        // Check if the user already exists by email
+        if (userRepository.findByEmail(userRegistrationDTO.getEmail()) != null) {
+            throw new IllegalArgumentException("User with this email already exists.");
+        }
+
         User user = new User();
         user.setUsername(userRegistrationDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
