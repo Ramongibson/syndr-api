@@ -16,7 +16,7 @@ public class Contact {
     @Schema(hidden = true)
     private String id;
 
-    @NotBlank(message = "User ID is required")
+    @Schema(hidden = true)
     private String userId;
 
     @NotBlank(message = "First name is required")

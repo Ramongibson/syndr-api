@@ -16,8 +16,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-
     public User saveUser(UserRegistrationDTO userRegistrationDTO, boolean isAdmin) {
+        // Check if the user already exists
+        if (userRepository.findByUsername(userRegistrationDTO.getUsername()) != null) {
+            throw new IllegalArgumentException("User with this username already exists.");
+        }
+
         User user = new User();
         user.setUsername(userRegistrationDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
