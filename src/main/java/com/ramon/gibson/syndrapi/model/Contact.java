@@ -4,12 +4,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "contacts")
 @Data
+@Builder
 public class Contact {
 
     @Id
@@ -17,7 +19,7 @@ public class Contact {
     private String id;
 
     @Schema(hidden = true)
-    private String userId;
+    private String username;
 
     @NotBlank(message = "First name is required")
     @Size(min = 1, max = 50, message = "Name must be between 1 and 50 characters")
@@ -35,5 +37,3 @@ public class Contact {
     private String phoneNumber;
 
 }
-
-

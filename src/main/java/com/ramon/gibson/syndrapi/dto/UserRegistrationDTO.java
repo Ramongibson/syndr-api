@@ -1,13 +1,14 @@
 package com.ramon.gibson.syndrapi.dto;
 
-import com.ramon.gibson.syndrapi.validation.PasswordMatcher;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class UserRegistrationDTO {
 
     @NotBlank(message = "Username is required")
@@ -28,7 +29,7 @@ public class UserRegistrationDTO {
     private String emailPassword;
 
     @AssertTrue(message = "Password does not match")
-    public boolean isPassword(){
+    public boolean isPassword() {
         return password.equals(verifyPassword);
     }
 

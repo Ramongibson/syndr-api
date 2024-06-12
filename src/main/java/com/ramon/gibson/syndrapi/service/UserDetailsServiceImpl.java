@@ -1,10 +1,8 @@
 package com.ramon.gibson.syndrapi.service;
 
 import com.ramon.gibson.syndrapi.model.User;
-import com.ramon.gibson.syndrapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
