@@ -1,7 +1,7 @@
 package com.ramon.gibson.syndrapi.service;
 
-import com.ramon.gibson.syndrapi.dto.UserRegistrationDTO;
-import com.ramon.gibson.syndrapi.dto.UserUpdateDTO;
+import com.ramon.gibson.syndrapi.dto.UserRegistration;
+import com.ramon.gibson.syndrapi.dto.UserUpdate;
 import com.ramon.gibson.syndrapi.model.User;
 import com.ramon.gibson.syndrapi.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +45,7 @@ public class UserServiceTest {
 
     @Test
     public void testSaveUser_Success() {
-        UserRegistrationDTO dto = UserRegistrationDTO.builder()
+        UserRegistration dto = UserRegistration.builder()
                 .username("testuser")
                 .password("password")
                 .email("test@test.com")
@@ -68,7 +68,7 @@ public class UserServiceTest {
 
     @Test
     public void testSaveUser_UsernameExists() {
-        UserRegistrationDTO dto = UserRegistrationDTO.builder()
+        UserRegistration dto = UserRegistration.builder()
                 .username("testuser")
                 .password("password")
                 .email("test@test.com")
@@ -87,7 +87,7 @@ public class UserServiceTest {
 
     @Test
     public void testSaveUser_EmailExists() {
-        UserRegistrationDTO dto = UserRegistrationDTO.builder()
+        UserRegistration dto = UserRegistration.builder()
                 .username("testuser")
                 .password("password")
                 .email("test@test.com")
@@ -107,7 +107,7 @@ public class UserServiceTest {
 
     @Test
     public void testUpdateUser_Success() {
-        UserUpdateDTO dto = UserUpdateDTO.builder()
+        UserUpdate dto = UserUpdate.builder()
                 .username("newusername")
                 .email("newemail@test.com")
                 .password("newpassword")
@@ -136,7 +136,7 @@ public class UserServiceTest {
 
     @Test
     public void testUpdateUser_UsernameExists() {
-        UserUpdateDTO dto = UserUpdateDTO.builder()
+        UserUpdate dto = UserUpdate.builder()
                 .username("newusername")
                 .email("newemail@test.com")
                 .build();
@@ -156,7 +156,7 @@ public class UserServiceTest {
 
     @Test
     public void testUpdateUser_EmailExists() {
-        UserUpdateDTO dto = UserUpdateDTO.builder()
+        UserUpdate dto = UserUpdate.builder()
                 .username("newusername")
                 .email("newemail@test.com")
                 .build();

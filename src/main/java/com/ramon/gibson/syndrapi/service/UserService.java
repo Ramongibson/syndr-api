@@ -1,7 +1,7 @@
 package com.ramon.gibson.syndrapi.service;
 
-import com.ramon.gibson.syndrapi.dto.UserRegistrationDTO;
-import com.ramon.gibson.syndrapi.dto.UserUpdateDTO;
+import com.ramon.gibson.syndrapi.dto.UserRegistration;
+import com.ramon.gibson.syndrapi.dto.UserUpdate;
 import com.ramon.gibson.syndrapi.model.User;
 import com.ramon.gibson.syndrapi.repository.UserRepository;
 import com.ramon.gibson.syndrapi.util.EncryptionUtil;
@@ -26,7 +26,7 @@ public class UserService {
     @Value("${encryption_key}")
     private String encryptionKey;
 
-    public User saveUser(UserRegistrationDTO userRegistrationDTO, boolean isAdmin) {
+    public User saveUser(UserRegistration userRegistrationDTO, boolean isAdmin) {
         log.debug("Attempting to save user with username: {}", userRegistrationDTO.getUsername());
 
         // Check if the user already exists
@@ -61,7 +61,7 @@ public class UserService {
         return savedUser;
     }
 
-    public User updateUser(UserUpdateDTO updatedUser) {
+    public User updateUser(UserUpdate updatedUser) {
         String username = UserAuthenticationUtil.getAuthenticatedUsername();
         log.debug("Attempting to update user: {}", username);
         User user = findByUsername(username);

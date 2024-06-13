@@ -1,8 +1,8 @@
 package com.ramon.gibson.syndrapi.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ramon.gibson.syndrapi.dto.UserRegistrationDTO;
-import com.ramon.gibson.syndrapi.dto.UserUpdateDTO;
+import com.ramon.gibson.syndrapi.dto.UserRegistration;
+import com.ramon.gibson.syndrapi.dto.UserUpdate;
 import com.ramon.gibson.syndrapi.model.User;
 import com.ramon.gibson.syndrapi.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +40,7 @@ public class UserControllerTest {
 
     @Test
     public void testCreateUser_Success() throws Exception {
-        UserRegistrationDTO userRegistrationDTO = UserRegistrationDTO.builder()
+        UserRegistration userRegistrationDTO = UserRegistration.builder()
                 .username("testuser")
                 .password("password")
                 .verifyPassword("password")
@@ -50,7 +50,7 @@ public class UserControllerTest {
 
         User user = User.builder().id("1").username("testuser").email("test@test.com").build();
 
-        when(userService.saveUser(any(UserRegistrationDTO.class), any(Boolean.class))).thenReturn(user);
+        when(userService.saveUser(any(UserRegistration.class), any(Boolean.class))).thenReturn(user);
 
         mockMvc.perform(post("/user/create")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -62,14 +62,14 @@ public class UserControllerTest {
 
     @Test
     public void testCreateUser_UsernameExists() throws Exception {
-        UserRegistrationDTO userRegistrationDTO = UserRegistrationDTO.builder()
+        UserRegistration userRegistrationDTO = UserRegistration.builder()
                 .username("testuser")
                 .password("password")
                 .email("test@test.com")
                 .emailPassword("emailPassword")
                 .build();
 
-        when(userService.saveUser(any(UserRegistrationDTO.class), any(Boolean.class)))
+        when(userService.saveUser(any(UserRegistration.class), any(Boolean.class)))
                 .thenThrow(new IllegalArgumentException("User with this username already exists."));
 
         mockMvc.perform(post("/user/create")
@@ -81,14 +81,14 @@ public class UserControllerTest {
 
     @Test
     public void testCreateUser_EmailExists() throws Exception {
-        UserRegistrationDTO userRegistrationDTO = UserRegistrationDTO.builder()
+        UserRegistration userRegistrationDTO = UserRegistration.builder()
                 .username("testuser")
                 .password("password")
                 .email("test@test.com")
                 .emailPassword("emailPassword")
                 .build();
 
-        when(userService.saveUser(any(UserRegistrationDTO.class), any(Boolean.class)))
+        when(userService.saveUser(any(UserRegistration.class), any(Boolean.class)))
                 .thenThrow(new IllegalArgumentException("User with this email already exists."));
 
         mockMvc.perform(post("/user/create")
@@ -100,7 +100,7 @@ public class UserControllerTest {
 
     @Test
     public void testUpdateUser_Success() throws Exception {
-        UserUpdateDTO userUpdateDTO = UserUpdateDTO.builder()
+        UserUpdate userUpdateDTO = UserUpdate.builder()
                 .username("newusername")
                 .email("newemail@test.com")
                 .password("newpassword")
@@ -109,7 +109,7 @@ public class UserControllerTest {
 
         User user = User.builder().id("1").username("newusername").email("newemail@test.com").build();
 
-        when(userService.updateUser(any(UserUpdateDTO.class))).thenReturn(user);
+        when(userService.updateUser(any(UserUpdate.class))).thenReturn(user);
 
         mockMvc.perform(put("/user/update")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -121,14 +121,14 @@ public class UserControllerTest {
 
     @Test
     public void testUpdateUser_UsernameExists() throws Exception {
-        UserUpdateDTO userUpdateDTO = UserUpdateDTO.builder()
+        UserUpdate userUpdateDTO = UserUpdate.builder()
                 .username("newusername")
                 .email("newemail@test.com")
                 .password("newpassword")
                 .emailPassword("newemailPassword")
                 .build();
 
-        when(userService.updateUser(any(UserUpdateDTO.class)))
+        when(userService.updateUser(any(UserUpdate.class)))
                 .thenThrow(new IllegalArgumentException("User with this username already exists."));
 
         mockMvc.perform(put("/user/update")
@@ -140,14 +140,14 @@ public class UserControllerTest {
 
     @Test
     public void testUpdateUser_EmailExists() throws Exception {
-        UserUpdateDTO userUpdateDTO = UserUpdateDTO.builder()
+        UserUpdate userUpdateDTO = UserUpdate.builder()
                 .username("newusername")
                 .email("newemail@test.com")
                 .password("newpassword")
                 .emailPassword("newemailPassword")
                 .build();
 
-        when(userService.updateUser(any(UserUpdateDTO.class)))
+        when(userService.updateUser(any(UserUpdate.class)))
                 .thenThrow(new IllegalArgumentException("User with this email already exists."));
 
         mockMvc.perform(put("/user/update")

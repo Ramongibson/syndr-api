@@ -1,7 +1,7 @@
 package com.ramon.gibson.syndrapi.controller;
 
-import com.ramon.gibson.syndrapi.dto.UserRegistrationDTO;
-import com.ramon.gibson.syndrapi.dto.UserUpdateDTO;
+import com.ramon.gibson.syndrapi.dto.UserRegistration;
+import com.ramon.gibson.syndrapi.dto.UserUpdate;
 import com.ramon.gibson.syndrapi.model.User;
 import com.ramon.gibson.syndrapi.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,7 +19,7 @@ public class UserController {
 
     @PostMapping("/create")
     @Operation(summary = "Create a new user")
-    public ResponseEntity<?> createUser(@Valid @RequestBody UserRegistrationDTO userRegistrationDTO) {
+    public ResponseEntity<?> createUser(@Valid @RequestBody UserRegistration userRegistrationDTO) {
         try {
             User newUser = userService.saveUser(userRegistrationDTO, false);
             return ResponseEntity.ok(newUser);
@@ -30,7 +30,7 @@ public class UserController {
 
     @PutMapping("/update")
     @Operation(summary = "Update an existing user")
-    public ResponseEntity<?> updateUser(@Valid @RequestBody UserUpdateDTO userUpdateDTO) {
+    public ResponseEntity<?> updateUser(@Valid @RequestBody UserUpdate userUpdateDTO) {
         try {
             User updatedUser = userService.updateUser(userUpdateDTO);
             return ResponseEntity.ok(updatedUser);

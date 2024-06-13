@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UserRegistrationDTO {
+public class UserRegistration {
 
     @NotBlank(message = "Username is required")
     @Size(max = 15, message = "Username must be 15 characters or less")
@@ -28,9 +28,17 @@ public class UserRegistrationDTO {
     @NotBlank(message = "Email password is required")
     private String emailPassword;
 
+    @NotBlank(message = "Verify email password is required")
+    private String verifyEmailPassword;
+
     @AssertTrue(message = "Password does not match")
     public boolean isPassword() {
         return password.equals(verifyPassword);
+    }
+
+    @AssertTrue(message = "Email password does not match")
+    public boolean isEmailPassword() {
+        return emailPassword.equals(verifyEmailPassword);
     }
 
 }
